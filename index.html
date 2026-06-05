@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoTapon — Clean Today, Green Tomorrow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2f5d50;
+        --secondary: #a3b18a;
+        --background: #f8f9f4;
+        --surface: #ffffff;
+        --text-primary: #1f2937;
+        --text-secondary: #6b7280;
+        --alert: #d97706;
+        --mint: #cfe5d9;
+        --shadow: 0 18px 55px rgba(31, 41, 55, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Space Grotesk", "Sora", sans-serif;
+        color: var(--text-primary);
+        background: radial-gradient(circle at top right, #e5f0ea, transparent 55%),
+          radial-gradient(circle at 20% 20%, #f3f7ef, transparent 45%),
+          var(--background);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .hardware-only {
+        display: none;
+      }
+
+      .owner-mode .hardware-only {
+        display: block;
+      }
+
+      .owner-mode .non-hardware {
+        display: none;
+      }
+
+      header {
+        padding: 28px 6vw 0;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(47, 93, 80, 0.1);
+        border-radius: 999px;
+        padding: 10px 22px;
+        box-shadow: 0 16px 40px rgba(47, 93, 80, 0.08);
+        backdrop-filter: blur(12px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: conic-gradient(from 180deg, #2f5d50, #a3b18a, #2f5d50);
+        position: relative;
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.65);
+      }
+
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border-radius: 10px;
+        background: #f8f9f4;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 18px;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+      }
+
+      .hero {
+        padding: 72px 6vw 64px;
+        display: grid;
+        gap: 36px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.6rem, 3.8vw, 4.2rem);
+        margin: 0 0 18px;
+        line-height: 1.05;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        max-width: 540px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        padding: 14px 24px;
+        border-radius: 999px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 16px 30px rgba(47, 93, 80, 0.25);
+      }
+
+      .btn-secondary {
+        background: #fff;
+        color: var(--primary);
+        border: 1px solid rgba(47, 93, 80, 0.2);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-small {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+      }
+
+      .btn:focus-visible,
+      .input:focus-visible {
+        outline: 2px solid rgba(47, 93, 80, 0.45);
+        outline-offset: 2px;
+      }
+
+      .hero-card {
+        background: var(--surface);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #d3e6dc, transparent 70%);
+        top: -120px;
+        right: -80px;
+      }
+
+      .stat-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stat {
+        background: #f7faf7;
+        border-radius: 16px;
+        padding: 16px;
+      }
+
+      .stat h3 {
+        margin: 0 0 6px;
+        font-size: 1.4rem;
+        color: var(--primary);
+      }
+
+      .section {
+        padding: 64px 6vw;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 28px;
+      }
+
+      .section-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--primary);
+        font-size: 0.85rem;
+      }
+
+      .card-grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .card {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .card h3 {
+        margin: 0 0 12px;
+      }
+
+      .card ul {
+        margin: 0;
+        padding-left: 16px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .image-grid {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .image-card {
+        border-radius: 22px;
+        padding: 18px;
+        min-height: 200px;
+        display: grid;
+        align-content: space-between;
+        color: #0f172a;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%,
+          rgba(248, 249, 244, 0.92) 75%);
+        pointer-events: none;
+      }
+
+      .image-card-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .image-card h3 {
+        margin: 0 0 8px;
+      }
+
+      .metrics-grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      }
+
+      .metric-card {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 10px;
+      }
+
+      .metric-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .metric-label {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+      }
+
+      .metric-value {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .metric-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+
+      .analytics-grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .graph {
+        height: 120px;
+        display: grid;
+        align-items: end;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 8px;
+        padding: 12px 8px;
+        background: #f4f7f4;
+        border-radius: 14px;
+      }
+
+      .graph span {
+        display: block;
+        width: 100%;
+        background: linear-gradient(180deg, #2f5d50, #9eb7aa);
+        border-radius: 10px 10px 6px 6px;
+      }
+
+      .sensor-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .sensor-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: #f7faf7;
+        font-size: 0.95rem;
+      }
+
+      .status-online {
+        color: #1f7a5a;
+        font-weight: 600;
+      }
+
+      .status-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        flex: 0 0 8px;
+        border-radius: 50%;
+        background: #16a34a;
+        box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(22, 163, 74, 0.08);
+        color: #14532d;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .bar {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(47, 93, 80, 0.12);
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #2f5d50, #7ba08f);
+      }
+
+      .badge {
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(217, 119, 6, 0.12);
+        color: var(--alert);
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 100;
+      }
+
+      .modal.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-card {
+        width: min(520px, 100%);
+        background: var(--surface);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 16px;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h3 {
+        margin: 0;
+      }
+
+      .input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(47, 93, 80, 0.2);
+        font-size: 1rem;
+      }
+
+      .error-text {
+        color: var(--alert);
+        font-size: 0.9rem;
+        display: none;
+      }
+
+      .error-text.is-visible {
+        display: block;
+      }
+
+      .panel {
+        background: #fdfdf9;
+        border-radius: 28px;
+        padding: 28px;
+        border: 1px solid rgba(47, 93, 80, 0.12);
+        display: grid;
+        gap: 20px;
+      }
+
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .pill {
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(47, 93, 80, 0.08);
+        color: var(--primary);
+        font-size: 0.85rem;
+      }
+
+      .feature-line {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 16px 1fr;
+        align-items: center;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary);
+      }
+
+      .cta {
+        padding: 64px 6vw 88px;
+      }
+
+      .cta-box {
+        background: linear-gradient(120deg, #2f5d50, #476f61);
+        color: #fff;
+        border-radius: 32px;
+        padding: 36px;
+        display: grid;
+        gap: 24px;
+        box-shadow: 0 24px 60px rgba(47, 93, 80, 0.35);
+      }
+
+      .cta-box p {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      footer {
+        padding: 26px 6vw 40px;
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 720px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 40px;
+        }
+
+        .stat-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate {
+        animation: rise 0.8s ease forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.1s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="non-hardware">
+        <div class="nav">
+          <div class="brand">
+            <div class="brand-mark" aria-hidden="true"></div>
+            <span>EcoTapon</span>
+          </div>
+          <div class="nav-links">
+            <a href="#platform">Platform</a>
+            <a href="#metrics">Metrics</a>
+            <a href="#modules">Modules</a>
+            <a href="#uiux">Design</a>
+            <a href="#impact">Impact</a>
+          </div>
+          <button class="btn btn-secondary">Request Demo</button>
+        </div>
+      </header>
+
+      <section class="hero non-hardware" id="platform">
+        <div class="animate">
+          <span class="chip">Hybrid online/offline + ESP32 ready</span>
+          <h1>Clean Today, Green Tomorrow</h1>
+          <p>
+            EcoTapon is a modern cross-platform React Native application connected
+            to ESP32 smart waste bins with hybrid online/offline communication,
+            sustainability tracking, gamification, and real-time monitoring.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary">Throw Trash Now</button>
+            <button class="btn btn-secondary" id="ownerModeButton">
+              Owner Mode
+            </button>
+          </div>
+        </div>
+        <div class="hero-card animate delay-1">
+          <div class="panel-header">
+            <strong>Every Toss Counts</strong>
+            <span class="pill">User impact view</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat">
+              <h3>1.8 kg</h3>
+              <p>Estimated waste this week</p>
+            </div>
+            <div class="stat">
+              <h3>0.9 kg</h3>
+              <p>CO2 prevented today</p>
+            </div>
+            <div class="stat">
+              <h3>3</h3>
+              <p>Bins used near you</p>
+            </div>
+            <div class="stat">
+              <h3>72%</h3>
+              <p>Cleanliness score</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section hardware-only" id="metrics" hidden>
+        <div class="section-title">
+          <h2>Hardware Status Dashboard</h2>
+          <div class="section-actions">
+            <span class="status-pill">
+              <span class="status-dot" aria-hidden="true"></span>
+              ESP32 Connected
+            </span>
+            <span class="chip">Owner Mode</span>
+            <button class="btn btn-secondary btn-small" id="backToUser">
+              Back to User View
+            </button>
+          </div>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">IoT Active Status</span>
+              <span class="pill">Online</span>
+            </div>
+            <div class="metric-value">Connected</div>
+            <div class="metric-meta">
+              <span>Gateway: 1/1</span>
+              <span>Heartbeat: 12s</span>
+            </div>
+            <div class="metric-meta">
+              <span>Bins: 0/3 online</span>
+              <span>Last sync 3m ago</span>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">Bio Bin</span>
+              <span class="badge">Offline</span>
+            </div>
+            <div class="metric-value">0 kg</div>
+            <div class="bar"><div class="bar-fill" style="width: 0%"></div></div>
+            <div class="metric-meta">
+              <span>Classification: Bio</span>
+              <span>Segregated: 0 kg</span>
+            </div>
+            <div class="metric-meta">
+              <span>Carbon saved: 0 kg</span>
+              <span>Status: No signal</span>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">Non-Bio Bin</span>
+              <span class="badge">Offline</span>
+            </div>
+            <div class="metric-value">0 kg</div>
+            <div class="bar"><div class="bar-fill" style="width: 0%"></div></div>
+            <div class="metric-meta">
+              <span>Classification: Non-Bio</span>
+              <span>Segregated: 0 kg</span>
+            </div>
+            <div class="metric-meta">
+              <span>Carbon saved: 0 kg</span>
+              <span>Status: No signal</span>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">Recyclable Bin</span>
+              <span class="badge">Offline</span>
+            </div>
+            <div class="metric-value">0 kg</div>
+            <div class="bar"><div class="bar-fill" style="width: 0%"></div></div>
+            <div class="metric-meta">
+              <span>Classification: Recyclable</span>
+              <span>Segregated: 0 kg</span>
+            </div>
+            <div class="metric-meta">
+              <span>Carbon saved: 0 kg</span>
+              <span>Status: No signal</span>
+            </div>
+          </div>
+        </div>
+        <div class="section-title" style="margin-top: 36px">
+          <h2>Graphs, Metrics, Analytics</h2>
+          <span class="chip">Realtime trends</span>
+        </div>
+        <div class="analytics-grid">
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">Fill Level Trend</span>
+              <span class="pill">Last 8 hrs</span>
+            </div>
+            <div class="graph" aria-hidden="true">
+              <span style="height: 22%"></span>
+              <span style="height: 36%"></span>
+              <span style="height: 42%"></span>
+              <span style="height: 58%"></span>
+              <span style="height: 64%"></span>
+              <span style="height: 71%"></span>
+              <span style="height: 62%"></span>
+              <span style="height: 48%"></span>
+            </div>
+            <div class="metric-meta">
+              <span>Avg 44%</span>
+              <span>Peak 71%</span>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">Power Usage</span>
+              <span class="pill">Live</span>
+            </div>
+            <div class="metric-value">18.4 W</div>
+            <div class="bar"><div class="bar-fill" style="width: 38%"></div></div>
+            <div class="metric-meta">
+              <span>Avg 16.2 W</span>
+              <span>Peak 22.1 W</span>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">Conveyor Status</span>
+              <span class="pill">Online</span>
+            </div>
+            <div class="metric-value">Idle</div>
+            <div class="metric-meta">
+              <span>Last run 12 min ago</span>
+              <span>Load 0.0 kg</span>
+            </div>
+          </div>
+        </div>
+        <div class="section-title" style="margin-top: 36px">
+          <h2>Sensors and Cameras</h2>
+          <span class="chip">All sensors online</span>
+        </div>
+        <div class="analytics-grid">
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">Sensor Status</span>
+              <span class="pill">Online</span>
+            </div>
+            <div class="sensor-list">
+              <div class="sensor-row">
+                <span>Primary Sensor</span>
+                <span class="status-online">Online</span>
+              </div>
+              <div class="sensor-row">
+                <span>Secondary Sensor</span>
+                <span class="status-online">Online</span>
+              </div>
+              <div class="sensor-row">
+                <span>Capacitive Sensor</span>
+                <span class="status-online">Online</span>
+              </div>
+              <div class="sensor-row">
+                <span>Inductive Sensor</span>
+                <span class="status-online">Online</span>
+              </div>
+              <div class="sensor-row">
+                <span>Load Cell</span>
+                <span>Offline</span>
+              </div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-head">
+              <span class="metric-label">Camera Feeds</span>
+              <span class="pill">2 Cameras</span>
+            </div>
+            <div class="sensor-list">
+              <div class="sensor-row">
+                <span>Camera 1</span>
+                <span class="status-online">Online</span>
+              </div>
+              <div class="sensor-row">
+                <span>Camera 2</span>
+                <span class="status-online">Online</span>
+              </div>
+            </div>
+            <div class="metric-meta">
+              <span>Storage 62%</span>
+              <span>Stream 1080p</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section non-hardware" id="impact-gallery">
+        <div class="section-title">
+          <h2>Why Your Toss Matters</h2>
+          <span class="chip">Live community impact</span>
+        </div>
+        <div class="image-grid">
+          <div
+            class="image-card"
+            style="background: radial-gradient(circle at top, #e0efe7, #f8f9f4)"
+          >
+            <div class="image-card-content">
+              <h3>Clean Streets</h3>
+              <p>Each throw keeps public spaces cleaner and safer.</p>
+            </div>
+          </div>
+          <div
+            class="image-card"
+            style="background: radial-gradient(circle at 10% 10%, #d8eadf, #f6f8f3)"
+          >
+            <div class="image-card-content">
+              <h3>Better Segregation</h3>
+              <p>Bio, non-bio, and recyclable bins boost sorting accuracy.</p>
+            </div>
+          </div>
+          <div
+            class="image-card"
+            style="background: radial-gradient(circle at 90% 10%, #e1efe4, #f8f9f4)"
+          >
+            <div class="image-card-content">
+              <h3>Carbon Saved</h3>
+              <p>Every kilogram tracked helps reduce carbon output.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="modal" id="hardwareModal" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true">
+          <div class="modal-header">
+            <h3>Secure Hardware Access</h3>
+            <button class="btn btn-secondary" id="closeModal">Close</button>
+          </div>
+          <p>Enter the access password to view hardware metrics.</p>
+          <input
+            class="input"
+            id="hardwarePassword"
+            type="password"
+            placeholder="Password"
+            autocomplete="current-password"
+          />
+          <div class="error-text" id="passwordError">
+            Incorrect password. Try again.
+          </div>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="unlockButton">Unlock</button>
+            <button class="btn btn-secondary" id="cancelButton">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="section non-hardware" id="modules">
+        <div class="section-title">
+          <h2>Real-time Operations</h2>
+          <span class="chip">Monitoring + alerts + control</span>
+        </div>
+        <div class="card-grid">
+          <div class="card animate delay-1">
+            <h3>Device Monitoring</h3>
+            <ul>
+              <li>Real-time fill level indicator</li>
+              <li>Battery monitoring</li>
+              <li>Sensor diagnostics</li>
+              <li>WiFi signal monitoring</li>
+            </ul>
+          </div>
+          <div class="card animate delay-2">
+            <h3>Control Actions</h3>
+            <ul>
+              <li>Quick reset actions</li>
+              <li>Sensor calibration</li>
+              <li>Manage ESP32 devices</li>
+              <li>Calibrate sensors</li>
+            </ul>
+          </div>
+          <div class="card animate delay-3">
+            <h3>Analytics Suite</h3>
+            <ul>
+              <li>View analytics dashboards</li>
+              <li>Trend charts and forecasting</li>
+              <li>Connection indicators</li>
+              <li>Status cards by region</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section non-hardware" id="uiux">
+        <div class="section-title">
+          <h2>Bio-Minimalism UI/UX</h2>
+          <span class="chip">Surface-first layout</span>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <strong>Core Screens</strong>
+            <span class="pill">Onboarding + role-based access</span>
+          </div>
+          <div class="card-grid">
+            <div class="card">
+              <h3>Entry Flow</h3>
+              <ul>
+                <li>Splash Screen</li>
+                <li>Login Screen</li>
+                <li>Register Screen</li>
+                <li>Role Selection Screen</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Primary Navigation</h3>
+              <ul>
+                <li>Dashboard</li>
+                <li>Bin Details</li>
+                <li>Device Management</li>
+                <li>Analytics</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Signature Widgets</h3>
+              <ul>
+                <li>Circular fill progress</li>
+                <li>Status cards</li>
+                <li>Trend charts</li>
+                <li>Connection indicators</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section non-hardware" id="impact">
+        <div class="section-title">
+          <h2>Eco System Module</h2>
+          <span class="chip">Impact + education + community</span>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <h3>Eco Users</h3>
+            <ul>
+              <li>Track environmental impact</li>
+              <li>View educational content</li>
+              <li>Earn badges</li>
+              <li>Join community leaderboard</li>
+              <li>View sustainability metrics</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Impact Features</h3>
+            <ul>
+              <li>CO2 prevention tracking</li>
+              <li>Trees equivalent counter</li>
+              <li>Waste segregation education</li>
+              <li>Gamified achievements</li>
+              <li>Community challenges</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Notification Module</h3>
+            <ul>
+              <li>Critical fill alerts</li>
+              <li>Temperature anomaly detection</li>
+              <li>Offline status warnings</li>
+              <li>Maintenance reminders</li>
+              <li>Push, local, and BLE nearby alerts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta non-hardware">
+        <div class="cta-box">
+          <div>
+            <h2>EcoTapon keeps cities cleaner, faster.</h2>
+            <p>
+              Connect every smart bin, monitor the fleet, and turn sustainability
+              data into action with an app that works even when networks do not.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <button class="btn btn-secondary">Schedule Hardware Install</button>
+            <button class="btn btn-primary">Get the Mobile App</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="non-hardware">
+        <div>
+          EcoTapon &mdash; Hybrid telemetry, community impact, and real-time
+          waste intelligence.
+        </div>
+      </footer>
+    </div>
+    <script>
+      const ownerModeButton = document.getElementById("ownerModeButton");
+      const hardwareModal = document.getElementById("hardwareModal");
+      const closeModal = document.getElementById("closeModal");
+      const cancelButton = document.getElementById("cancelButton");
+      const unlockButton = document.getElementById("unlockButton");
+      const passwordInput = document.getElementById("hardwarePassword");
+      const passwordError = document.getElementById("passwordError");
+      const metricsSection = document.getElementById("metrics");
+      const backToUser = document.getElementById("backToUser");
+
+      const openModal = () => {
+        hardwareModal.classList.add("is-open");
+        hardwareModal.setAttribute("aria-hidden", "false");
+        passwordInput.value = "";
+        passwordError.classList.remove("is-visible");
+        setTimeout(() => passwordInput.focus(), 0);
+      };
+
+      const closeHardwareModal = () => {
+        hardwareModal.classList.remove("is-open");
+        hardwareModal.setAttribute("aria-hidden", "true");
+      };
+
+      const unlockMetrics = () => {
+        if (passwordInput.value === "123") {
+          metricsSection.hidden = false;
+          document.body.classList.add("owner-mode");
+          closeHardwareModal();
+          metricsSection.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+
+        passwordError.classList.add("is-visible");
+        passwordInput.focus();
+      };
+
+      ownerModeButton.addEventListener("click", openModal);
+      closeModal.addEventListener("click", closeHardwareModal);
+      cancelButton.addEventListener("click", closeHardwareModal);
+      unlockButton.addEventListener("click", unlockMetrics);
+      backToUser.addEventListener("click", () => {
+        document.body.classList.remove("owner-mode");
+        metricsSection.hidden = true;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      passwordInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          unlockMetrics();
+        }
+      });
+      hardwareModal.addEventListener("click", (event) => {
+        if (event.target === hardwareModal) {
+          closeHardwareModal();
+        }
+      });
+    </script>
+  </body>
+</html>
